@@ -4,4 +4,9 @@
   main {
     flex: 1;
   }
+
+  .mainContent {
+    overflow-y: auto;
+    height: calc(100vh - 6.5rem);
+  }
 }

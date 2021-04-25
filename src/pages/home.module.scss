@@ -1,7 +1,7 @@
 .homePage {
   padding: 0 4rem;
-  height: calc(100vh - 6.5rem);
-  overflow-y: auto;
+  overflow: auto;
+
 
   h2 {
     margin-top: 3rem;
@@ -12,9 +12,9 @@
 .latestEpisodes {
   ul {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
 
     li {
       background-color: var(--white);
@@ -24,6 +24,8 @@
       position: relative;
       display: flex;
       align-items: center;
+      min-width: 576px;
+      flex: 1;
 
       img {
         width: 6rem;
