@@ -2,13 +2,14 @@ import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import { FC, useContext } from 'react';
+import Head from 'next/head';
+import { FC } from 'react';
 import apiService from '../services/api-service';
 import durationToTime from '../utils/durationToTime';
 import Image from 'next/image';
 import styles from './home.module.scss';
 import Episode from '../interfaces/episode';
-import { PlayerContext } from '../components/Player/Context';
+import { usePlayer } from '../components/Player/Context';
 
 interface HomeProps {
   latestsEpisodes: Episode[];
@@ -16,11 +17,15 @@ interface HomeProps {
 }
 
 const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
-  const { playList } = useContext(PlayerContext);
+  const { playList } = usePlayer();
   const episodes = [...latestsEpisodes, ...allEpisodes];
 
   return (
     <article className={styles.homePage}>
+      <Head>
+        <title>Podcastr | Oak Devlopment</title>
+      </Head>
+      
       <section className={styles.latestEpisodes}>
         <h2>Ultimos lançamentos</h2>
 
@@ -44,7 +49,7 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
                 <span>{episode.durationString}</span>
               </div>
 
-              <button type="button" onClick={() => playList(episodes, index + 2)}>
+              <button type="button" onClick={() => playList(episodes, index)}>
                 <Image
                   src="/play-green.svg"
                   alt="Tocar"
@@ -93,7 +98,7 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
                 <td className={styles.publishedAt}>{episode.publishedAt}</td>
                 <td>{episode.durationString}</td>
                 <td>
-                  <button type="button" onClick={() => playList(episodes, index)}>
+                  <button type="button" onClick={() => playList(episodes, index + 2)}>
                     <Image
                       src="/play-green.svg"
                       alt="Trocar episódio"

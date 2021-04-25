@@ -9,14 +9,22 @@ import apiService from '../../services/api-service';
 import durationToTime from '../../utils/durationToTime';
 import Link from 'next/link';
 import styles from './episode.module.scss';
+import { usePlayer } from '../../components/Player/Context';
+import Head  from 'next/head';
 
 interface EpisodePageProps {
   episode: Episode;
 }
 
 const EpisodePage: FC<EpisodePageProps> = ({ episode }): JSX.Element => {
+  const { play } = usePlayer();
+
   return (
     <article className={styles.episode}>
+      <Head>
+        <title>{episode.title}</title>
+      </Head>
+
       <section className={styles.thumbnailContainer}>
         <Link href="/">
           <button type="button">
@@ -32,7 +40,7 @@ const EpisodePage: FC<EpisodePageProps> = ({ episode }): JSX.Element => {
           objectFit="cover"
         />
 
-        <button type="button">
+        <button type="button" onClick={() => play(episode)}>
           <Image
             src="/play.svg"
             alt="Tocar episódio"
