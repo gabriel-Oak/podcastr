@@ -68,13 +68,15 @@ const EpisodePage: FC<EpisodePageProps> = ({ episode }): JSX.Element => {
 export default EpisodePage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await apiService('/episodes', {
-    params: {
-      _limit: 2,
-      _sort: 'published_at',
-      _order: 'desc',
-    }
-  });
+  // const { data } = await apiService('/episodes', {
+  //   params: {
+  //     _limit: 2,
+  //     _sort: 'published_at',
+  //     _order: 'desc',
+  //   }
+  // });
+
+  const data = [];
 
   const paths = data.map((e) => ({
     params: {

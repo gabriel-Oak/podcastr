@@ -7,6 +7,7 @@ import { FC } from 'react';
 import apiService from '../services/api-service';
 import durationToTime from '../utils/durationToTime';
 import Image from 'next/image';
+import handler from './api/episodes';
 import styles from './home.module.scss';
 import Episode from '../interfaces/episode';
 import { usePlayer } from '../components/Player/Context';
@@ -25,7 +26,7 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
       <Head>
         <title>Podcastr | Oak Devlopment</title>
       </Head>
-      
+
       <section className={styles.latestEpisodes}>
         <h2>Ultimos lançamentos</h2>
 
@@ -118,13 +119,14 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await apiService.get('/episodes', {
-    params: {
-      _limit: 12,
-      _sort: 'published_at',
-      _order: 'desc',
-    }
-  });
+  // const { data } = await apiService.get('/episodes', {
+  //   params: {
+  //     _limit: 12,
+  //     _sort: 'published_at',
+  //     _order: 'desc',
+  //   }
+  // });
+  const data = [];
 
   const episodes = data.map((e) => ({
     id: e.id,
