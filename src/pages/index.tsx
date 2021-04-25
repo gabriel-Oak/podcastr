@@ -26,7 +26,7 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
       <Head>
         <title>Podcastr | Oak Devlopment</title>
       </Head>
-
+      
       <section className={styles.latestEpisodes}>
         <h2>Ultimos lançamentos</h2>
 
@@ -119,14 +119,13 @@ const Home: FC<HomeProps> = ({ allEpisodes, latestsEpisodes }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const { data } = await apiService.get('/episodes', {
-  //   params: {
-  //     _limit: 12,
-  //     _sort: 'published_at',
-  //     _order: 'desc',
-  //   }
-  // });
-  const data = [];
+  const { data } = await apiService.get('/episodes', {
+    params: {
+      _limit: 12,
+      _sort: 'published_at',
+      _order: 'desc',
+    }
+  });
 
   const episodes = data.map((e) => ({
     id: e.id,

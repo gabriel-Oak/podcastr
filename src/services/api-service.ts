@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiService = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://podcastr-gabriel-oak.vercel.app/api',
 });
 
 export default apiService;
